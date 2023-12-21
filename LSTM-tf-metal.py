@@ -8,7 +8,8 @@ from tensorflow.keras.optimizers import Adam, SGD
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 os.environ['TF_GPU_THREAD_MODE'] = 'gpu_private'
-os.environ['TF_GPU_THREAD_COUNT'] = '4' #if not hvd_utils.is_using_hvd() else str(hvd.size())
+os.environ['TF_GPU_THREAD_COUNT'] = '4'  # if not hvd_utils.is_using_hvd() else str(hvd.size())
+
 
 def set_gpu(gpu_ids_list):
     gpus = tf.config.list_physical_devices('GPU')
@@ -48,8 +49,9 @@ print(x_train.shape)
 print(x_test.shape)
 
 # Pad all sequences
-padded_inputs = pad_sequences(x_train, maxlen=max_sequence_length, value = 0.0) # 0.0 because it corresponds with <PAD>
-padded_inputs_test = pad_sequences(x_test, maxlen=max_sequence_length, value = 0.0) # 0.0 because it corresponds with <PAD>
+padded_inputs = pad_sequences(x_train, maxlen=max_sequence_length, value=0.0)  # 0.0 because it corresponds with <PAD>
+padded_inputs_test = pad_sequences(x_test, maxlen=max_sequence_length,
+                                   value=0.0)  # 0.0 because it corresponds with <PAD>
 
 # Define the Keras model
 model = Sequential()
@@ -69,4 +71,4 @@ history = model.fit(padded_inputs, y_train, batch_size=batch_size, epochs=number
 
 # Test the model after training
 test_results = model.evaluate(padded_inputs_test, y_test, verbose=False)
-print(f'Test results - Loss: {test_results[0]} - Accuracy: {100*test_results[1]}%')
+print(f'Test results - Loss: {test_results[0]} - Accuracy: {100 * test_results[1]}%')
