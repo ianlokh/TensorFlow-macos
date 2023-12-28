@@ -6,7 +6,7 @@ import tensorflow_datasets as tfds
 # mlcompute.set_mlc_device(device_name='cpu') # Available options are 'cpu', 'gpu', and 'any'.
 
 os.environ['TF_GPU_THREAD_MODE'] = 'gpu_private'
-os.environ['TF_GPU_THREAD_COUNT'] = '4' #if not hvd_utils.is_using_hvd() else str(hvd.size())
+os.environ['TF_GPU_THREAD_COUNT'] = '4'  # if not hvd_utils.is_using_hvd() else str(hvd.size())
 
 BATCH_SIZE = 1024
 EPOCHS = 100
@@ -30,7 +30,6 @@ def set_gpu(gpu_ids_list):
 
 set_gpu([0])
 
-
 # load MNIST
 print('\ndownloading mnist')
 (ds_train, ds_test), ds_info = tfds.load(
@@ -40,6 +39,7 @@ print('\ndownloading mnist')
     as_supervised=True,
     with_info=True,
 )
+
 
 def normalize_img(image, label):
     """Normalize images: 'unit8' -> 'float32'."""
@@ -65,14 +65,18 @@ model = tf.keras.Sequential([
     tf.keras.layers.MaxPooling2D(),
     tf.keras.layers.Conv2D(64, 3, padding='same', activation='relu'),
     tf.keras.layers.MaxPooling2D(),
+    tf.keras.layers.Conv2D(64, 3, padding='same', activation='relu'),
+    tf.keras.layers.MaxPooling2D(),
+    tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dense(128, activation='relu'),
-    tf.keras.layers.Dense(10)
+    tf.keras.layers.Dense(10, activation='softmax')
 ])
 
 model.compile(
-    optimizer="adam", #tf.keras.optimizers.legacy.SGD(learning_rate=0.001),
-    loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    # optimizer="adam",  # tf.keras.optimizers.legacy.SGD(learning_rate=0.001),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
     metrics=['accuracy']
 )
 
