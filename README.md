@@ -29,6 +29,7 @@ source zshrc.miniconda3
 6. Setup environment for Tensorflow Metal
 ```commandline=bash
 source zshrc.miniconda3
-conda create -n <environment name> python==3.10.13
+conda create -n <environment name> python==<python version>
+conda activate <environment name>
 SYSTEM_VERSION_COMPAT=0 pip install tensorflow tensorflow-metal
 ```
