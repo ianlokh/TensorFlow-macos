@@ -31,7 +31,7 @@ source zshrc.miniconda3
 source zshrc.miniconda3
 conda create -n <environment name> python==<python version>
 conda activate <environment name>
-SYSTEM_VERSION_COMPAT=0 pip install tensorflow tensorflow-metal
+SYSTEM_VERSION_COMPAT=0 pip install tensorflow==2.17 tensorflow-metal
 ```
 7. Other optimisations
 To install other Apple Silicon optimised packages, use the following command:
