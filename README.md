@@ -33,3 +33,9 @@ conda create -n <environment name> python==<python version>
 conda activate <environment name>
 SYSTEM_VERSION_COMPAT=0 pip install tensorflow tensorflow-metal
 ```
+7. Other optimisations
+To install other Apple Silicon optimised packages, use the following command:
+```commandline=bash
+conda install -c conda-forge numpy "libblas=*=*accelerate"
+
+```
