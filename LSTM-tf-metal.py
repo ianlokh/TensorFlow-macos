@@ -30,7 +30,7 @@ set_gpu([0])
 
 # Model configuration
 additional_metrics = ['accuracy']
-batch_size = 256
+batch_size = 1024
 embedding_output_dims = 15
 loss_function = BinaryCrossentropy()
 max_sequence_length = 300
