@@ -31,12 +31,12 @@ source zshrc.miniconda3
 source zshrc.miniconda3
 conda create -n <environment name> python==<python version>
 conda activate <environment name>
-SYSTEM_VERSION_COMPAT=0 pip install tensorflow tensorflow-macos tensorflow-metal
+SYSTEM_VERSION_COMPAT=0 pip install tensorflow tensorflow-metal
 ```
-Note: If tensorflow-nacos is not present for some reason the performance is slow.
+
 
 7. Other optimisations: To install other Apple Silicon optimised packages, use the following command:
 ```commandline=bash
 conda install -c conda-forge numpy "libblas=*=*accelerate"
-
 ```
+Note: The latest numpy 2.x is already optimised for M3 so the above would apply if you are using numpy 1.x
