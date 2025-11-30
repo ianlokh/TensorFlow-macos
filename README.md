@@ -27,11 +27,14 @@ source zshrc.anaconda3
 source zshrc.miniconda3
 ```
 6. Setup environment for Tensorflow Metal
+As of Nov 2025:
+- the only Tensorflow version that can run with tensorflow-metal is 2.18
+- Python 2.12.12 is the maximum supported version
 ```commandline=bash
 source zshrc.miniconda3
 conda create -n <environment name> python==<python version>
 conda activate <environment name>
-SYSTEM_VERSION_COMPAT=0 pip install tensorflow tensorflow-metal
+SYSTEM_VERSION_COMPAT=0 pip install tensorflow==2.18 tensorflow-metal
 ```
 
 
