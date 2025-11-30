@@ -32,7 +32,7 @@ As of Nov 2025:
 - Python 2.12.12 is the maximum supported version
 ```commandline=bash
 source zshrc.miniconda3
-conda create -n <environment name> python==<python version>
+conda create -n <environment name> python==2.12
 conda activate <environment name>
 SYSTEM_VERSION_COMPAT=0 pip install tensorflow==2.18 tensorflow-metal
 ```
